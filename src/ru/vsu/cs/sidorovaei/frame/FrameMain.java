@@ -57,7 +57,7 @@ public class FrameMain extends JFrame {
             try {
                 if (fileChooserOpen.showOpenDialog(panelMain) == JFileChooser.APPROVE_OPTION) {
                     ArrayList<Line> listOfLines = new ArrayList<>(Logic.readListFromFile(fileChooserOpen.getSelectedFile().getPath()));
-                    if (Logic.checkIfListIsEmpty(listOfLines) || Logic.checkIfListIsNull(listOfLines)) {
+                    if (Logic.checkIfListIsEmpty(listOfLines)) {
                         System.out.println("Список пустой");
                         System.err.println(1);
                     }

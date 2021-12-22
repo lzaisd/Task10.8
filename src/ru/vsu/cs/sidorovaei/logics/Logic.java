@@ -11,9 +11,6 @@ public class Logic {
     public static boolean checkIfListIsEmpty(ArrayList<Line> list) {
         return list.size() == 0;
     }
-    public static boolean checkIfListIsNull(ArrayList<Line> list) {
-        return list == null;
-    }
 
     public static void bubbleSort(ArrayList<Line> listOfLines) {
         boolean isSorted = false;
