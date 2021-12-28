@@ -15,13 +15,13 @@ public class Logic {
     public static void bubbleSort(ArrayList<Line> listOfLines) {
         boolean isSorted = false;
         Line temp;
-        while(!isSorted) {
+        while (!isSorted) {
             isSorted = true;
             for (int i = 0; i < listOfLines.size() - 1; i++) {
-                if (listOfLines.get(i).getA() > listOfLines.get(i+1).getA()) {
+                if (listOfLines.get(i).getA() > listOfLines.get(i + 1).getA()) {
                     temp = listOfLines.get(i);
-                    listOfLines.set(i, listOfLines.get(i+1));
-                    listOfLines.set(i+1, temp);
+                    listOfLines.set(i, listOfLines.get(i + 1));
+                    listOfLines.set(i + 1, temp);
                     isSorted = false;
                 }
             }
@@ -35,18 +35,21 @@ public class Logic {
             finalListOfLines.add(listOfLines.get(0));
         } else {
             for (int i = 1; i < listOfLines.size(); i++) {
-                if (listOfLines.get(i).getA() >= listOfLines.get(i-1).getA() && listOfLines.get(i).getA() <= listOfLines.get(i-1).getB()) {
-                    if (listOfLines.get(i).getB() > listOfLines.get(i-1).getB()) {
-                        listOfLines.get(i).setA(listOfLines.get(i-1).getA());
+                if (listOfLines.get(i).getA() >= listOfLines.get(i - 1).getA() && listOfLines.get(i).getA() <= listOfLines.get(i - 1).getB()) {
+                    if (listOfLines.get(i).getB() > listOfLines.get(i - 1).getB()) {
+                        listOfLines.get(i).setA(listOfLines.get(i - 1).getA());
                         if (i == listOfLines.size() - 1) {                     //Условие для ситуации, когда нужно совместить последний и предпоследний отрезки
                             finalListOfLines.add(listOfLines.get(i));
                         }
                     } else {
-                        listOfLines.get(i).setA(listOfLines.get(i-1).getA());  //Нынешний отрезок находится внутри предыдущего
-                        listOfLines.get(i).setB(listOfLines.get(i-1).getB());
+                        listOfLines.get(i).setA(listOfLines.get(i - 1).getA());  //Нынешний отрезок находится внутри предыдущего
+                        listOfLines.get(i).setB(listOfLines.get(i - 1).getB());
+                        if (i == listOfLines.size() - 1) {
+                            finalListOfLines.add(listOfLines.get(i));
+                        }
                     }
                 } else if (i == listOfLines.size() - 1) {
-                    finalListOfLines.add(listOfLines.get(i-1));
+                    finalListOfLines.add(listOfLines.get(i - 1));
                     finalListOfLines.add(listOfLines.get(i));
                 } else {
                     finalListOfLines.add(listOfLines.get(i - 1));
@@ -92,14 +95,13 @@ public class Logic {
     public static void writeListToFile(String fileName, ArrayList<Line> listOfLines) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-            for (Line apart : listOfLines) {
+            for (Line line : listOfLines) {
                 StringBuilder sb = new StringBuilder();
-                sb.append(apart.getA());
+                sb.append(line.getA());
                 sb.append(" ");
-                sb.append(apart.getB());
-                sb.append(" ");
-                String line = new String(sb);
-                writer.write(line + "\n");
+                sb.append(line.getB());
+                String newLine = new String(sb);
+                writer.write(newLine + "\n");
                 writer.flush();
             }
         } catch (Exception e) {
